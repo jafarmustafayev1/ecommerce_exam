@@ -1,11 +1,12 @@
 from django.shortcuts import render, get_object_or_404
 
-from ecommerce.models import Product, Specification
+from ecommerce.models import Product, Specification, ProductAttribute
 
 
 # Create your views here.
 def index(request):
     products = Product.objects.all()
+    product_attributes = ProductAttribute.objects.filter()
     context = {
         'products': products
     }

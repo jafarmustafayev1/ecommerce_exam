@@ -79,3 +79,26 @@ class Specification(BaseModel):
     def __str__(self):
         return self.name
 
+
+
+class Attribute(models.Model):
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
+
+class AttributeValue(models.Model):
+    value = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.value
+
+
+class ProductAttribute(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL,related_name='product_attributes', null=True, blank=True)
+    attribute = models.ForeignKey(Attribute, on_delete=models.SET_NULL, null=True, blank=True)
+    attribute_value = models.ForeignKey(AttributeValue, on_delete=models.SET_NULL, null=True, blank=True)
+
+
+

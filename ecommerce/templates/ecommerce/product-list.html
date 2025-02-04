@@ -2340,10 +2340,10 @@
                     </div>
                 </div>
             </div>
-            {% for product in products %}
                 <div class="card">
                     <div class="card-body p-0 overflow-hidden">
                         <div class="row g-0">
+                        {% for product in products %}
                             <div class="col-12 p-card">
                                 <div class="row">
                                     <div class="col-sm-5 col-md-4">
@@ -2413,7 +2413,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                        {% endfor %}
                         </div>
                     </div>
                     <div class="card-footer border-top d-flex justify-content-center">
@@ -2428,7 +2428,6 @@
                                 data-bs-placement="top" title="Next"><span class="fas fa-chevron-right"></span></button>
                     </div>
                 </div>
-            {% endfor %}
             <footer class="footer">
                 <div class="row g-0 justify-content-between fs--1 mt-4 mb-3">
                     <div class="col-12 col-sm-auto text-center">

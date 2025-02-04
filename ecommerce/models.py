@@ -51,9 +51,10 @@ class Product(BaseModel):
 
     @property
     def discounted_price(self):
+        self.new_price = self.price
         if self.discount > 0:
-            self.price = Decimal(self.price) * Decimal((1 - self.discount / 100))
-        return Decimal(self.price).quantize(Decimal('0.001'))
+            self.new_price = Decimal(self.price) * Decimal((1 - self.discount / 100))
+        return Decimal(self.new_price).quantize(Decimal('0'))
 
     def __str__(self):
         return self.name

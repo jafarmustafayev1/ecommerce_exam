@@ -8,6 +8,7 @@ from django import forms
 class BaseModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    my_order = models.PositiveIntegerField(default=0, blank=False, null=False)
 
     class Meta:
         abstract = True
@@ -20,6 +21,7 @@ class Category(BaseModel):
         return self.title
 
     class Meta:
+        ordering = ['my_order']
         verbose_name = 'category'
         verbose_name_plural = "categories"
 
@@ -50,13 +52,14 @@ class Product(BaseModel):
     @property
     def discounted_price(self):
         if self.discount > 0:
-            self.new_price = Decimal(self.price) * Decimal((1 - self.discount / 100))
-        return Decimal(self.new_price).quantize(Decimal('0.001'))
+            self.price = Decimal(self.price) * Decimal((1 - self.discount / 100))
+        return Decimal(self.price).quantize(Decimal('0.001'))
 
     def __str__(self):
         return self.name
 
     class Meta:
+        ordering = ['my_order']
         verbose_name = 'product'
         verbose_name_plural = 'products'
 

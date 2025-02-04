@@ -31,13 +31,16 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+    "baton",
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
     'ecommerce.apps.EcommerceConfig',
+    'adminsortable2',
+    "import_export",
 ]
 
 MIDDLEWARE = [
@@ -49,6 +52,15 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+BATON = {
+    "SITE_HEADER": "Mening Django Admin Panelim",
+    "SITE_TITLE": "Admin Panel",
+    "INDEX_TITLE": "Boshqaruv paneli",
+    "SUPPORT_HREF": "https://example.com/support",
+    "COPYRIGHT": "2025 © Muzaffar",
+}
+
 
 ROOT_URLCONF = 'config.urls'
 

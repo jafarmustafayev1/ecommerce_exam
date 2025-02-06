@@ -1,10 +1,8 @@
 from django.db import models
 from decimal import Decimal
-from django import forms
-
-# Create your models here.
 
 
+# Asosiy model
 class BaseModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -14,6 +12,7 @@ class BaseModel(models.Model):
         abstract = True
 
 
+# Kategoriya modeli
 class Category(BaseModel):
     title = models.CharField(max_length=100, unique=True)
 
@@ -26,6 +25,7 @@ class Category(BaseModel):
         verbose_name_plural = "categories"
 
 
+# Product modeli
 class Product(BaseModel):
     class RatingChoice(models.IntegerChoices):
         ONE = 1
@@ -41,20 +41,20 @@ class Product(BaseModel):
     image = models.ImageField(upload_to='media/products/')
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, related_name='products', null=True, blank=True)
     quantity = models.PositiveIntegerField(default=1, null=True, blank=True)
-    stock = models.BooleanField(default=False   )
+    stock = models.BooleanField(default=False)
     favorite = models.BooleanField(default=False)
     rating = models.PositiveIntegerField(choices=RatingChoice.choices, default=RatingChoice.ONE.value)
 
     @property
     def get_absolute_url(self):
-        return self.image.url
+        return self.image.url if self.image else None
 
     @property
     def discounted_price(self):
-        self.new_price = self.price
         if self.discount > 0:
-            self.new_price = Decimal(self.price) * Decimal((1 - self.discount / 100))
-        return Decimal(self.new_price).quantize(Decimal('0'))
+            new_price = Decimal(self.price) * (Decimal(1) - Decimal(self.discount) / Decimal(100))
+            return new_price.quantize(Decimal('0.01'))  # Narxni 2 xonali kasr sifatida saqlash
+        return self.price
 
     def __str__(self):
         return self.name
@@ -64,24 +64,31 @@ class Product(BaseModel):
         verbose_name = 'product'
         verbose_name_plural = 'products'
 
+
+# Rasm modeli
 class Img(BaseModel):
     image = models.ImageField(upload_to='media/img/')
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, blank=True)
 
+    def __str__(self):
+        return f"Image for {self.product.name}" if self.product else "No product"
+
     @property
     def get_absolute_url(self):
-        return self.image.url
+        return self.image.url if self.image else None
 
+
+# Specification modeli
 class Specification(BaseModel):
     name = models.CharField(max_length=255)
     description = models.TextField(null=True, blank=True)
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
-        return self.name
+        return f"{self.name} - {self.product.name}" if self.product else self.name
 
 
-
+# Attribute modeli
 class Attribute(models.Model):
     name = models.CharField(max_length=255)
 
@@ -89,6 +96,7 @@ class Attribute(models.Model):
         return self.name
 
 
+# AttributeValue modeli
 class AttributeValue(models.Model):
     value = models.CharField(max_length=255)
 
@@ -96,10 +104,27 @@ class AttributeValue(models.Model):
         return self.value
 
 
+# ProductAttribute modeli
 class ProductAttribute(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.SET_NULL,related_name='product_attributes', null=True, blank=True)
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, related_name='product_attributes', null=True, blank=True)
     attribute = models.ForeignKey(Attribute, on_delete=models.SET_NULL, null=True, blank=True)
     attribute_value = models.ForeignKey(AttributeValue, on_delete=models.SET_NULL, null=True, blank=True)
 
+    def __str__(self):
+        return f"{self.product.name} - {self.attribute.name}: {self.attribute_value.value}"
 
 
+# Customer modeli
+class Customer(BaseModel):
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    email = models.EmailField(unique=True)
+    phone = models.CharField(max_length=15, unique=True)
+    address = models.TextField()
+
+    @property
+    def full_name(self):
+        return f"{self.first_name} {self.last_name}"
+
+    def __str__(self):
+        return self.full_name

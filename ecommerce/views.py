@@ -54,7 +54,7 @@ def customer_create(request):
         if form.is_valid():
             customer = form.save(commit=False)
             customer.save()
-            return redirect('customer_list')
+            return redirect('shop:customer_list')
     else:
         form = CustomerCreateForm()
 
@@ -69,7 +69,7 @@ def customer_edit(request, pk):
         form = CustomerEditForm(request.POST, instance=customer)
         if form.is_valid():
             form.save()  # Save the updated customer
-            return redirect('customer_list', pk=customer.pk)  # Redirect to the customer's detail page
+            return redirect('shop:customer_list', pk=customer.pk)  # Redirect to the customer's detail page
     else:
         form = CustomerEditForm(instance=customer)
 

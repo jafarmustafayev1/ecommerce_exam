@@ -262,7 +262,7 @@
                                 </a>
                                     <!-- more inner pages-->
                                     <ul class="nav collapse false" id="product">
-                                        <li class="nav-item"><a class="nav-link" href="{% url 'index' %}"
+                                        <li class="nav-item"><a class="nav-link" href="{% url 'shop:index' %}"
                                                                 aria-expanded="false">
                                             <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Product list</span>
                                             </div>
@@ -1495,7 +1495,7 @@
                                 </a>
                                     <!-- more inner pages-->
                                 </li>
-                                <a href="{% url 'customer_create' %}" class="btn btn-falcon-default btn-sm">
+                                <a href="{% url 'shop:customer_create' %}" class="btn btn-falcon-default btn-sm">
                                     <span class="fas fa-plus" data-fa-transform="shrink-3 down-2"></span>
                                     <span class="d-none d-sm-inline-block ms-1">New</span>
                                 </a>
@@ -2282,7 +2282,7 @@
                                 </div>
                             </div>
                             <div id="table-customers-replace-element">
-                                <a href="{% url 'customer_create' %}" class="btn btn-falcon-default btn-sm">
+                                <a href="{% url 'shop:customer_create' %}" class="btn btn-falcon-default btn-sm">
                                     <span class="fas fa-plus" data-fa-transform="shrink-3 down-2"></span>
                                     <span class="d-none d-sm-inline-block ms-1">New</span>
                                 </a>
@@ -2353,7 +2353,7 @@
                                             <div class="dropdown-menu dropdown-menu-end border py-0"
                                                  aria-labelledby="customer-dropdown-0">
                                                 <div class="bg-white py-2"><a class="dropdown-item"
-                                                                              href="{% url 'customer_edit' customer.id %}">Edit</a><a
+                                                                              href="{% url 'shop:customer_edit' customer.id %}">Edit</a><a
                                                         class="dropdown-item text-danger" href="#!">Delete</a></div>
                                             </div>
                                         </div>

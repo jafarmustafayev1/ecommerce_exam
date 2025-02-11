@@ -84,7 +84,7 @@
 
               <button class="btn navbar-toggler-humburger-icon navbar-vertical-toggle" data-bs-toggle="tooltip" data-bs-placement="left" title="Toggle Navigation"><span class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
 
-            </div><a class="navbar-brand" href="{% url 'index' %}">
+            </div><a class="navbar-brand" href="{% url 'shop:index' %}">
               <div class="d-flex align-items-center py-3"><img class="me-2" src="{% static 'ecommerce/assets/img/icons/spot-illustrations/falcon.png' %}" alt="" width="40" /><span class="font-sans-serif">falcon</span>
               </div>
             </a>
@@ -98,7 +98,7 @@
                     </div>
                   </a>
                   <ul class="nav collapse false" id="dashboard">
-                    <li class="nav-item"><a class="nav-link" href="{% url 'index' %}" aria-expanded="false">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'shop:index' %}" aria-expanded="false">
                         <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Default</span>
                         </div>
                       </a>
@@ -212,7 +212,7 @@
                       </a>
                       <!-- more inner pages-->
                       <ul class="nav collapse show" id="product">
-                        <li class="nav-item"><a class="nav-link" href="{% url 'index' %}" aria-expanded="false">
+                        <li class="nav-item"><a class="nav-link" href="{% url 'shop:index' %}" aria-expanded="false">
                             <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Product list</span>
                             </div>
                           </a>
@@ -1477,7 +1477,7 @@
           <nav class="navbar navbar-light navbar-glass navbar-top navbar-expand">
 
             <button class="btn navbar-toggler-humburger-icon navbar-toggler me-1 me-sm-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalCollapse" aria-controls="navbarVerticalCollapse" aria-expanded="false" aria-label="Toggle Navigation"><span class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
-            <a class="navbar-brand me-1 me-sm-3" href="{% url 'index' %}">
+            <a class="navbar-brand me-1 me-sm-3" href="{% url 'shop:index' %}">
               <div class="d-flex align-items-center"><img class="me-2" src="{% static 'ecommerce/assets/img/icons/spot-illustrations/falcon.png' %}" alt="" width="40" /><span class="font-sans-serif">falcon</span>
               </div>
             </a>
@@ -1746,7 +1746,7 @@
                   </div>
                 </div>
                 <div class="col-lg-6">
-                  <h5>{{ product.name }}</h5><a class="fs--1 mb-2 d-block" href="{% url 'product_detail' product.id %}">{{ product.category }}</a>
+                  <h5>{{ product.name }}</h5><a class="fs--1 mb-2 d-block" href="{% url 'shop:product_detail' product.id %}">{{ product.category }}</a>
                   {% with ''|center:product.rating as range %}
                       {% for f in range %}
                           <span class="fa fa-star text-warning"></span>

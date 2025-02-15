@@ -148,16 +148,22 @@
                 {% endfor %}
             </div>
         </div>
-        <div class="card-footer border-top d-flex justify-content-center">
-            <button class="btn btn-falcon-default btn-sm me-2" type="button" disabled="disabled"
-                    data-bs-toggle="tooltip" data-bs-placement="top" title="Prev"><span
-                    class="fas fa-chevron-left"></span></button>
-            <a class="btn btn-sm btn-falcon-default text-primary me-2" href="#!">1</a><a
-                class="btn btn-sm btn-falcon-default me-2" href="#!">2</a><a
-                class="btn btn-sm btn-falcon-default me-2" href="#!"><span class="fas fa-ellipsis-h"></span></a><a
-                class="btn btn-sm btn-falcon-default me-2" href="#!">35</a>
-            <button class="btn btn-falcon-default btn-sm" type="button" data-bs-toggle="tooltip"
-                    data-bs-placement="top" title="Next"><span class="fas fa-chevron-right"></span></button>
+         <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1" class="pagination-btn">&laquo; First</a>
+            <a href="?page={{ page_obj.previous_page_number }}" class="pagination-btn">Previous</a>
+        {% endif %}
+
+        <span class="current">
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" class="pagination-btn">Next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}" class="pagination-btn">Last &raquo;</a>
+        {% endif %}
+    </span>
         </div>
     </div>
 {% endblock %}

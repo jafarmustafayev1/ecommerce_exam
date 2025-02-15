@@ -20,7 +20,7 @@ def login_page(request):
             user = authenticate(request, email=email, password=password)
             if user:
                 login(request, user)
-                return redirect('ecommerce:home')
+                return redirect('ecommerce:index')
             else:
                 messages.add_message(request,
                                      messages.ERROR,
@@ -33,7 +33,7 @@ def login_page(request):
 
 def logout_page(request):
     logout(request)
-    return redirect('ecommerce:home')
+    return redirect('ecommerce:index')
 
 
 def register(request):

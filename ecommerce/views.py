@@ -1,6 +1,7 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
-from .models import Customer
+from .models import Customer, Category
 from ecommerce.models import Product
 from .forms import CustomerEditForm , CustomerCreateForm
 
@@ -8,7 +9,6 @@ from .forms import CustomerEditForm , CustomerCreateForm
 def index(request):
     search_query = request.GET.get('q', '')
     filter_type = request.GET.get('filter', '')
-    products = Product.objects.all()
 
     if filter_type == 'date':
         products = Product.objects.all().order_by('-created_at')
@@ -24,10 +24,17 @@ def index(request):
 
     if search_query:
         products = Product.objects.filter(name__icontains=search_query)
+
+    paginator = Paginator(products, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     context = {
-        'products': products
+        'page_obj': page_obj,
     }
     return render(request, 'ecommerce/product-list.html', context)
+
+
 
 # Mahsulot tafsilotlari sahifasi
 def product_detail(request, pk):

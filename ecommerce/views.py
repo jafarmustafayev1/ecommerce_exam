@@ -1,6 +1,8 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
+from django.views import View
+
 from .models import Customer, Category
 from ecommerce.models import Product
 from .forms import CustomerEditForm , CustomerCreateForm
@@ -65,7 +67,7 @@ def customer_create(request):
     else:
         form = CustomerCreateForm()
 
-    return render(request, 'ecommerce/customer-create.html', {'form': form})
+    return render(request, 'ecommerce/add_customer.html', {'form': form})
 
 
 # Edit customer view
@@ -80,4 +82,14 @@ def customer_edit(request, pk):
     else:
         form = CustomerEditForm(instance=customer)
 
-    return render(request, 'ecommerce/customer-edit.html', {'form': form, 'customer': customer})
+    return render(request, 'ecommerce/edit_customer.html', {'form': form, 'customer': customer})
+
+
+class CustomerCreate(View):
+    def get(self, request):
+        form = CustomerCreateForm()
+
+    def post(self, request):
+        form = CustomerCreateForm(request.POST)
+        return render(request, 'ecommerce/add_customer.html',{form : form})
+

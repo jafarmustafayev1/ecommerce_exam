@@ -60,7 +60,7 @@ BATON = {
     "SITE_TITLE": "Admin Panel",
     "INDEX_TITLE": "Boshqaruv paneli",
     "SUPPORT_HREF": "https://example.com/support",
-    "COPYRIGHT": "2025 © Muzaffar",
+    "COPYRIGHT": "2025 © Ja'far",
 }
 
 
@@ -90,8 +90,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'n56_ecommerce',
+        'USER': 'postgres',
+        'PASSWORD': '123',
+        'HOST': 'localhost',
+        'PORT': 5432,
     }
 }
 

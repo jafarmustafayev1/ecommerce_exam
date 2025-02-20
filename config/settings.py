@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "adminsortable2",
     "import_export",
     "user.apps.UserConfig",
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -138,3 +139,22 @@ LOGGING = {
         },
     },
 }
+
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '891809118156-jt0sqisfqt84bc2g0goamlbpu9lhqp9n.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+LOGIN_REDIRECT_URL = 'ecommerce:index'
+
+
+# settings.py
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'muzaffaribrohimov7777@gmail.com'
+EMAIL_HOST_PASSWORD = 'skjs qhvb rajk otcb'

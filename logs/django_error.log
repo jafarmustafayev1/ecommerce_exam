@@ -1465,3 +1465,207 @@ django.db.utils.IntegrityError: null value in column "created_at" of relation "e
 DETAIL:  Failing row contains (2, null, 2025-02-20 13:08:16.777724+00, 0, sherali, zuhra@gmail.com, qawesrdtfgy, 1, 1).
 
 "POST /comment/1/ HTTP/1.1" 500 161274
+Internal Server Error: /social-auth/complete/google-oauth2/
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\social_django\utils.py", line 43, in wrapper
+    return func(request, backend, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\social_django\views.py", line 31, in complete
+    return do_complete(
+           ^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\social_core\actions.py", line 50, in do_complete
+    user = backend.complete(user=user, redirect_name=redirect_name, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\social_core\backends\base.py", line 38, in complete
+    return self.auth_complete(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\social_core\utils.py", line 226, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\social_core\backends\oauth.py", line 433, in auth_complete
+    return self.do_auth(
+           ^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\social_core\utils.py", line 226, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\social_core\backends\oauth.py", line 446, in do_auth
+    return self.strategy.authenticate(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\social_django\strategy.py", line 104, in authenticate
+    return authenticate(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\django\views\decorators\debug.py", line 75, in sensitive_variables_wrapper
+    return func(*func_args, **func_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\django\contrib\auth\__init__.py", line 79, in authenticate
+    user = backend.authenticate(request, **credentials)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\social_core\backends\base.py", line 81, in authenticate
+    return self.pipeline(pipeline, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\social_core\backends\base.py", line 84, in pipeline
+    out = self.run_pipeline(pipeline, pipeline_index, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\social_core\backends\base.py", line 116, in run_pipeline
+    result = func(*args, **out) or {}
+             ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\social_core\pipeline\user.py", line 79, in create_user
+    return {"is_new": True, "user": strategy.create_user(**fields)}
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\social_core\strategy.py", line 51, in create_user
+    return self.storage.user.create_user(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\social_django\storage.py", line 86, in create_user
+    user = cls.user_model()._default_manager.create_user(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: UserManager.create_user() missing 1 required positional argument: 'password'
+"GET /social-auth/complete/google-oauth2/?state=cWV57UJs03xrdNJNaD7sXsNo8nMSXSUQ&code=4%2F0ASVgi3IZY79FVwhE5dCfAbdTm1JlqZthOLguu54oX6k_l1uIKnGW7yrP280uSc1z66B_Ew&scope=email+profile+openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email&authuser=0&prompt=consent HTTP/1.1" 500 195997
+Internal Server Error: /social-auth/complete/google-oauth2/
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\social_core\utils.py", line 226, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\social_core\backends\oauth.py", line 424, in auth_complete
+    response = self.request_access_token(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\social_core\backends\oauth.py", line 403, in request_access_token
+    return self.get_json(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\social_core\backends\base.py", line 246, in get_json
+    return self.request(url, *args, **kwargs).json()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\social_core\backends\base.py", line 242, in request
+    response.raise_for_status()
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\requests\models.py", line 1024, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://accounts.google.com/o/oauth2/token
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\social_django\utils.py", line 43, in wrapper
+    return func(request, backend, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\social_django\views.py", line 31, in complete
+    return do_complete(
+           ^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\social_core\actions.py", line 50, in do_complete
+    user = backend.complete(user=user, redirect_name=redirect_name, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\social_core\backends\base.py", line 38, in complete
+    return self.auth_complete(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\social_core\utils.py", line 235, in wrapper
+    raise AuthCanceled(args[0], response=err.response)
+social_core.exceptions.AuthCanceled: Authentication process canceled
+"GET /social-auth/complete/google-oauth2/?state=cWV57UJs03xrdNJNaD7sXsNo8nMSXSUQ&code=4%2F0ASVgi3IZY79FVwhE5dCfAbdTm1JlqZthOLguu54oX6k_l1uIKnGW7yrP280uSc1z66B_Ew&scope=email+profile+openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email&authuser=0&prompt=consent HTTP/1.1" 500 137272
+Internal Server Error: /social-auth/complete/google-oauth2/
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\django\urls\base.py", line 71, in reverse
+    extra, resolver = resolver.namespace_dict[ns]
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^^^
+KeyError: 'shop'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\social_django\utils.py", line 43, in wrapper
+    return func(request, backend, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\social_django\views.py", line 31, in complete
+    return do_complete(
+           ^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\social_core\actions.py", line 86, in do_complete
+    url = setting_url(
+          ^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\social_core\utils.py", line 216, in setting_url
+    value = backend.setting(name)
+            ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\social_core\backends\base.py", line 30, in setting
+    return self.strategy.setting(name, default=default, backend=self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\social_core\strategy.py", line 45, in setting
+    return self.get_setting(name)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\social_django\strategy.py", line 45, in get_setting
+    value = resolve_url(value)
+            ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\django\shortcuts.py", line 180, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\django\urls\base.py", line 82, in reverse
+    raise NoReverseMatch("%s is not a registered namespace" % key)
+django.urls.exceptions.NoReverseMatch: 'shop' is not a registered namespace
+"GET /social-auth/complete/google-oauth2/?state=cWV57UJs03xrdNJNaD7sXsNo8nMSXSUQ&code=4%2F0ASVgi3Jlic30eSCf5KD-W8rylED-vmjPcjK7UyLYcgxzsDpaD9MbUP_a8WqLEpK21qT6eg&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=none HTTP/1.1" 500 131761
+Internal Server Error: /social-auth/complete/google-oauth2/
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\social_django\utils.py", line 43, in wrapper
+    return func(request, backend, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\social_django\views.py", line 31, in complete
+    return do_complete(
+           ^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\social_core\actions.py", line 50, in do_complete
+    user = backend.complete(user=user, redirect_name=redirect_name, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\social_core\backends\base.py", line 38, in complete
+    return self.auth_complete(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\social_core\utils.py", line 226, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\social_core\backends\oauth.py", line 417, in auth_complete
+    state = self.validate_state()
+            ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ecommerce\.venv\Lib\site-packages\social_core\backends\oauth.py", line 107, in validate_state
+    raise AuthStateMissing(self, "state")
+social_core.exceptions.AuthStateMissing: Session value state missing.
+"GET /social-auth/complete/google-oauth2/?state=cWV57UJs03xrdNJNaD7sXsNo8nMSXSUQ&code=4%2F0ASVgi3Jlic30eSCf5KD-W8rylED-vmjPcjK7UyLYcgxzsDpaD9MbUP_a8WqLEpK21qT6eg&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=none HTTP/1.1" 500 115555

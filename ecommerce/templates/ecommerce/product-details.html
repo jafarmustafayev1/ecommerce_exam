@@ -8,14 +8,38 @@
                 <div class="col-lg-6 mb-4 mb-lg-0">
                     <div class="product-slider" id="galleryTop">
                         <div class="swiper-container theme-slider position-lg-absolute all-0"
-                             data-swiper='{"autoHeight":true,"spaceBetween":5,"loop":true,"loopedSlides":5,"thumb":{"spaceBetween":5,"slidesPerView":5,"loop":true,"freeMode":true,"grabCursor":true,"loopedSlides":5,"centeredSlides":true,"slideToClickedSlide":true,"watchSlidesVisibility":true,"watchSlidesProgress":true,"parent":"#galleryTop"},"slideToClickedSlide":true}'>
+                             data-swiper='{
+                 "autoHeight": true,
+                 "spaceBetween": 10,
+                 "loop": true,
+                 "centeredSlides": true,
+                 "slidesPerView": 3,
+                 "effect": "coverflow",
+                 "coverflowEffect": {
+                     "rotate": 30,
+                     "stretch": 0,
+                     "depth": 100,
+                     "modifier": 1,
+                     "slideShadows": true
+                 },
+                 "navigation": {
+                     "nextEl": ".swiper-button-next",
+                     "prevEl": ".swiper-button-prev"
+                 },
+                 "pagination": {
+                     "el": ".swiper-pagination",
+                     "clickable": true
+                 }
+             }'>
                             <div class="swiper-wrapper h-100">
-                                {% for i in product.product_images.all %}
-                                    <div class="swiper-slide h-100"><img class="rounded-1 fit-cover h-100 w-100"
-                                                                         src=" {{ i.image.get_absolute_url }}" alt=""/>
+                                {% for image in product.product_images.all %}
+                                    <div class="swiper-slide h-100">
+                                        <img class="rounded-1 fit-cover h-100 w-100"
+                                             src="{{ image.image.url }}" alt=""/>
                                     </div>
                                 {% endfor %}
                             </div>
+                            <div class="swiper-pagination"></div>
                             <div class="swiper-nav">
                                 <div class="swiper-button-next swiper-button-white"></div>
                                 <div class="swiper-button-prev swiper-button-white"></div>
@@ -23,14 +47,16 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-lg-6">
                     <h5>{{ product.name }}</h5><a class="fs--1 mb-2 d-block"
                                                   href="{% url 'ecommerce:product_detail' product.id %}"> {{ product.category }}</a>
-                    {% with ''|center:product.rating as range %}
-                        {% for f in range %}
-                            <span class="fa fa-star text-warning"></span>
-                        {% endfor %}
-                    {% endwith %}
+                    {#                    {% with ''|center:product.rating as range %}#}
+                    {#                        {% for f in range %}#}
+                    {#                            <span class="fa fa-star text-warning"></span>#}
+                    {#                        {% endfor %}#}
+                    {#                    {% endwith %}#}
+                    <h5>Average Rating: {{ product.average_rating|floatformat:1 }} ⭐</h5>
                     <p class="fs--1">No message</p>
                     <h4 class="fs-1 fs-md-2 text-warning mb-0">$ {{ product.discounted_price }}</h4>
                     <h5 class="fs--1 text-500 mb-0 mt-1">
@@ -62,10 +88,15 @@
                         <div class="col-auto px-2 px-md-3"><a class="btn btn-sm btn-primary" href="#!"><span
                                 class="fas fa-cart-plus me-sm-2"></span><span
                                 class="d-none d-sm-inline-block">Add To Cart</span></a></div>
-                        <div class="col-auto px-0"><a class="btn btn-sm btn-outline-danger border-300" href="#!"
-                                                      data-bs-toggle="tooltip" data-bs-placement="top"
-                                                      title="Add to Wish List"><span
-                                class="far fa-heart me-1"></span>282</a></div>
+                        <div class="col-auto px-0">
+                            <a class="btn btn-sm btn-outline-danger border-300" href="#"
+                               id="like-button"
+                               data-bs-toggle="tooltip" data-bs-placement="top"
+                               title="Add to Wish List">
+                                <span class="far fa-heart me-1"></span>
+                                <span id="like-count">282</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -111,12 +142,26 @@
                             <div class="tab-pane fade" id="tab-reviews" role="tabpanel" aria-labelledby="reviews-tab">
                                 <div class="row mt-3">
                                     <div class="col-lg-6 mb-4 mb-lg-0">
+                                        {#                                        {% for comment in comments %}#}
+                                        {#                                            <p class="fs--1 mb-2 text-600">{{ comment.full_name }}#}
+                                        {#                                                • {{ comment.updated_at }}</p>#}
+                                        {#                                            <p class="mb-0">{{ comment.body }}</p>#}
+                                        {#                                            <hr class="my-4"/>#}
+                                        {#                                        {% endfor %}#}
                                         {% for comment in comments %}
-                                            <p class="fs--1 mb-2 text-600">{{ comment.full_name }}
-                                                • {{ comment.updated_at }}</p>
+                                            <p class="fs--1 mb-2 text-600">
+                                                {{ comment.full_name }} • {{ comment.updated_at }}
+                                            </p>
                                             <p class="mb-0">{{ comment.body }}</p>
+                                            <p class="text-warning">
+                                                {% for _ in ""|rjust:comment.rating %}
+                                                    ★
+                                                {% endfor %}
+                                            </p>
+
                                             <hr class="my-4"/>
                                         {% endfor %}
+
                                     </div>
                                     <div class="col-lg-6 ps-lg-5">
                                         <form method="post" action="{% url 'ecommerce:comment_view' product.id %}">
@@ -125,21 +170,20 @@
                                             <div class="mb-3">
                                                 <label class="form-label">Rating:</label>
                                                 <div class="mb-3 rating">
+                                                    <input type="radio" name="rating" id="star5" value="5">
+                                                    <label for="star5" class="star">&#9733;</label>
                                                     
-                                                    <input type="radio" name="rating" id="star1" value="1">
-                                                    <label for="star1" class="star">&#9733;</label>
+                                                    <input type="radio" name="rating" id="star4" value="4">
+                                                    <label for="star4" class="star">&#9733;</label>
+                                                    
+                                                    <input type="radio" name="rating" id="star3" value="3">
+                                                    <label for="star3" class="star">&#9733;</label>
 
                                                     <input type="radio" name="rating" id="star2" value="2">
                                                     <label for="star2" class="star">&#9733;</label>
 
-                                                    <input type="radio" name="rating" id="star3" value="3">
-                                                    <label for="star3" class="star">&#9733;</label>
-
-                                                    <input type="radio" name="rating" id="star4" value="4">
-                                                    <label for="star4" class="star">&#9733;</label>
-
-                                                    <input type="radio" name="rating" id="star5" value="5">
-                                                    <label for="star5" class="star">&#9733;</label>
+                                                    <input type="radio" name="rating" id="star1" value="1">
+                                                    <label for="star1" class="star">&#9733;</label>
                                                 </div>
                                             </div>
                                             <div class="mb-3">

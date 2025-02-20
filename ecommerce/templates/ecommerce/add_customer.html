@@ -4,7 +4,7 @@
 <div class="container mt-5">
     <h2>Add Customer</h2>
 
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
 
         <!-- Full Name Field -->
@@ -41,6 +41,12 @@
         <div class="mb-3">
             <label for="phone_number" class="form-label">Phone Number</label>
             <input type="text" class="form-control" id="phone_number" name="phone_number">
+        </div>
+
+        <!-- Customer Image Field -->
+        <div class="mb-3">
+            <label for="customer_image" class="form-label">Customer Image</label>
+            <input type="file" class="form-control" id="customer_image" name="customer_image">
         </div>
 
         <!-- Submit Button -->

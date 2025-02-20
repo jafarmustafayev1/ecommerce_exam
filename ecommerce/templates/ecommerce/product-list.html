@@ -6,7 +6,7 @@
         <div class="card-body">
             <div class="row flex-between-center">
                 <div class="col-sm-auto mb-2 mb-sm-0">
-                    <h6 class="mb-0">Showing 1 pages of {{ products.count }} Products</h6>
+                    <h6 class="mb-0">Showing {{ page_obj.paginator.num_pages }} pages of {{ products.count }} Products</h6>
                 </div>
                 <div class="col-sm-auto">
                     <div class="row gx-2 align-items-center">
@@ -37,15 +37,17 @@
     <div class="card">
         <div class="card-body p-0 overflow-hidden">
             <div class="row g-0">
-                {% for product in products %}
+                {% for product in page_obj %}
                     <div class="col-12 p-card">
                         <div class="row">
                             <div class="col-sm-5 col-md-4">
-                                <div class="position-relative h-sm-100"><img class="card-img-top"
-                                                                             src=" {{ product.get_absolute_url }}"
-                                                                             alt="..."/>
+                                <div class="position-relative h-sm-100">
+                                    <img class="card-img-top"
+                                         src="{{ product.image }}"
+
+                                         alt="..."/>
                                     <div class="badge rounded-pill bg-success position-absolute top-0 end-0 me-2 mt-2 fs--2 z-index-2">
-                                        New
+                                        New 
                                     </div>
                                 </div>
                             </div>
@@ -59,7 +61,7 @@
                                                                          href="{% url 'ecommerce:product_detail' product.id %}"> {{ product.category }}</a>
                                         </p>
                                         <ul class="list-unstyled d-none d-lg-block">
-                                            {% for product_attribute in product.product_attributes.all|slice:":5" %}
+                                            {% for product_attribute in product.product_attributes.all|slice:":7" %}
                                                 <li>
                                                     <span class="fas fa-circle" data-fa-transform="shrink-12"></span>
                                                     <span>{{ product_attribute.attribute_value.value }}</span>
@@ -75,14 +77,15 @@
                                                 <del> {{ product.price }} </del>
                                                 <span class="ms-1"> {{ product.discount }}%</span>
                                             </h5>
-                                            <div class="mb-2 mt-3">
-                                                {% with ''|center:product.rating as range %}
-                                                    {% for f in range %}
-                                                        <span class="fa fa-star text-warning"></span>
-                                                    {% endfor %}
-                                                {% endwith %}
-                                                <span class="ms-1">( {{ product.quantity }})</span>
-                                            </div>
+                                            {#                                            <div class="mb-2 mt-3">#}
+                                            {#                                                {% with ''|center:product.rating as range %}#}
+                                            {#                                                    {% for f in range %}#}
+                                            {#                                                        <span class="fa fa-star text-warning"></span>#}
+                                            {#                                                    {% endfor %}#}
+                                            {#                                                {% endwith %}#}
+                                            {#                                                <span class="ms-1">( {{ product.quantity }})</span>#}
+                                            {#                                            </div>#}
+                                            <h5>Average Rating: {{ product.average_rating|floatformat:1 }} ⭐</h5>
                                             <div class="d-none d-lg-block">
                                                 <p class="fs--1 mb-1">Shipping Cost: <strong>$50</strong></p>
                                                 {% if product.stock == True %}
@@ -133,7 +136,7 @@
                                             </script>
 
                                             <a class="btn btn-sm btn-primary d-lg-block mt-lg-2"
-                                               href="#">
+                                               href="{% url 'ecommerce:add_to_cart' product.id %}">
                                                 <span class="fas fa-cart-plus"></span>
                                                 <span class="ms-2 d-none d-md-inline-block">Add to Cart</span>
                                             </a>
@@ -148,7 +151,7 @@
                 {% endfor %}
             </div>
         </div>
-         <div class="pagination">
+        <div class="pagination">
     <span class="step-links">
         {% if page_obj.has_previous %}
             <a href="?page=1" class="pagination-btn">&laquo; First</a>

@@ -71,11 +71,17 @@
                                     href="{% url 'ecommerce:customer_details' customer.id %}">
                                 <div class="d-flex d-flex align-items-center">
                                     <div class="avatar avatar-xl me-2">
-                                        <div class="avatar-name rounded-circle"><span
-                                                id="avatar-initials">{{ customer.full_name|slice:":2"|upper }}</span>
-                                        </div>
-
+                                        {% if customer.customer_image %}
+                                            <img src="{{ customer.get_absolute_url }}"
+                                                 class="rounded-circle">
+                                        {% else %}
+                                            <div class="avatar-name rounded-circle d-flex align-items-center justify-content-center bg-secondary text-white"
+                                                 style="width: 50px; height: 50px;">
+                                                <span id="avatar-initials">M</span>
+                                            </div>
+                                        {% endif %}
                                     </div>
+
                                     <div class="flex-1">
                                         <h5 class="mb-0 fs--1">{{ customer.full_name }}</h5>
                                     </div>
@@ -100,7 +106,8 @@
                                         <div class="bg-white py-2">
                                             <a class="dropdown-item"
                                                href="{% url 'ecommerce:edit_customer' customer.id %}">Edit</a>
-                                            <form method="POST" action="{% url 'ecommerce:delete_customer' customer.id %}"
+                                            <form method="POST"
+                                                  action="{% url 'ecommerce:delete_customer' customer.id %}"
                                                   onsubmit="return confirmDelete()">
                                                 {% csrf_token %}
                                                 <button type="submit" class="dropdown-item text-danger">Delete</button>

@@ -7,19 +7,24 @@
         <div class="card-header">
             <div class="row">
                 <div class="col">
-                    <h5 class="mb-2">{{ customer.full_name }} (<a
-                            href="mailto:{{ customer.email }}">{{ customer.email }}</a>)</h5><a
-                        class="btn btn-falcon-default btn-sm" href="#!"><span class="fas fa-plus fs--2 me-1"></span>Add
-                    note</a>
-                    <button class="btn btn-falcon-default btn-sm dropdown-toggle ms-2 dropdown-caret-none" type="button"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span
-                            class="fas fa-ellipsis-h"></span></button>
-                    <div class="dropdown-divider"></div>
-                    <form method="POST" action="{% url 'ecommerce:delete_customer' customer.id %}"
-                          onsubmit="return confirmDelete()">
-                        {% csrf_token %}
-                        <button type="submit" class="dropdown-item text-danger">Delete user</button>
-                    </form>
+                    <div class="col">
+                        <h5 class="mb-2">{{ customer.full_name }}</h5>
+                        <a href="mailto:{{ customer.email }}">( {{ customer.email }})</a>
+                            <button class="btn btn-falcon-default btn-sm dropdown-toggle ms-2 dropdown-caret-none"
+                                type="button" data-bs-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false"><span
+                                class="fas fa-ellipsis-h"></span></button>
+
+                        <div class="dropdown-menu"><a class="dropdown-item"
+                                                      href="{% url 'ecommerce:edit_customer' customer.id %}">Edit</a>
+                            <div class="dropdown-divider"></div>
+                            <form method="POST" action="{% url 'ecommerce:delete_customer' customer.id %}"
+                                  onsubmit="return confirmDelete()">
+                                {% csrf_token %}
+                                <button type="submit" class="dropdown-item text-danger">Delete user</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
             <script>
@@ -41,7 +46,6 @@
                 <p class="fs--1 mb-0 text-600">{{ created_date }}</p>
             </div>
         </div>
-    </div>
     </div>
     <div class="card mb-3">
         <div class="card-header">

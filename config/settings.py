@@ -143,6 +143,7 @@ LOGGING = {
 AUTHENTICATION_BACKENDS = [
     'social_core.backends.google.GoogleOAuth2',
     'django.contrib.auth.backends.ModelBackend',
+    # 'social_core.backends.facebook.FacebookOAuth2',
 ]
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '891809118156-jt0sqisfqt84bc2g0goamlbpu9lhqp9n.apps.googleusercontent.com'

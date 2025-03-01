@@ -13,7 +13,7 @@ qr = qrcode.QRCode(version = 1,
 qr.add_data(data)
 
 qr.make(fit = True)
-img = qr.make_image(fill_color = 'red',
-                    back_color = 'white')
+img = qr.make_image(fill_color = 'yellow',
+                    back_color = 'black')
 
 img.save('MyQRCode2.png')

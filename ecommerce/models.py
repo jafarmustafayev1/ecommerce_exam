@@ -1,4 +1,3 @@
-#-----------------------------------------------
 from django.db import models
 from decimal import Decimal
 from phonenumber_field.modelfields import PhoneNumberField
@@ -152,10 +151,10 @@ class Customer(BaseModel):
     def __str__(self):
         return f'{self.full_name} -> {self.generate_invoice_id()}'
 
-    # Admin emailini olish
     @staticmethod
     def get_admin_email():
         return "admin@example.com"
+
 
 class ShoppingCart(BaseModel):
     user = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='shopping_cart')
@@ -168,8 +167,21 @@ class ShoppingCart(BaseModel):
         return f'{self.user} -> {self.product}'
 
 
-# Signal uchun kodlar
+# New model for Product Images
+class ProductImage(BaseModel):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product_images')
+    image = models.ImageField(upload_to='product_images/')
+    is_primary = models.BooleanField(default=False)
 
+    def __str__(self):
+        return f"Image for {self.product.name}"
+
+    class Meta:
+        verbose_name = 'product image'
+        verbose_name_plural = 'product images'
+
+
+# Signal for handling product-related actions
 @receiver(pre_save, sender=Comment)
 def before_save_comment(sender, instance, **kwargs):
     if instance.rating < 1 or instance.rating > 5:
